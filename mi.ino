@@ -37,18 +37,19 @@ void handleCommand(String cmd) {
   int sepIndex = cmd.indexOf(':');
   String action = (sepIndex != -1) ? cmd.substring(0, sepIndex) : cmd;
   int value = (sepIndex != -1) ? cmd.substring(sepIndex + 1).toInt() : -1;
+  action.toUpperCase();
 
-  if (action == "F") {
+  if (action == "F" || action == "FORWARD") {
     if (value >= 0) setSpeed(value);
     moveAll(FORWARD);
     Serial.println("Moving Forward at speed " + String(value));
   } 
-  else if (action == "B") {
+  else if (action == "B" || action == "BACKWARD") {
     if (value >= 0) setSpeed(value);
     moveAll(BACKWARD);
     Serial.println("Moving Backward at speed " + String(value));
   } 
-  else if (action == "L") {
+  else if (action == "L" || action == "LEFT") {
     if (value >= 0) setSpeed(value);
     motor1.run(BACKWARD);
     motor2.run(BACKWARD);
@@ -56,7 +57,7 @@ void handleCommand(String cmd) {
     motor4.run(FORWARD);
     Serial.println("Turning Left at speed " + String(value));
   } 
-  else if (action == "R") {
+  else if (action == "R" || action == "RIGHT") {
     if (value >= 0) setSpeed(value);
     motor1.run(FORWARD);
     motor2.run(FORWARD);
@@ -64,7 +65,7 @@ void handleCommand(String cmd) {
     motor4.run(BACKWARD);
     Serial.println("Turning Right at speed " + String(value));
   } 
-  else if (action == "S") {
+  else if (action == "S" || action == "STOP") {
     stopMotors();
     Serial.println("Stopped");
   } 
